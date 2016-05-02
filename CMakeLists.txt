@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2015 Mattia Basaglia
+# Copyright (C) 2015-2016 Mattia Basaglia
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -29,19 +29,22 @@ set(PROJECT_WEBSITE "https://github.com/mbasaglia/PixelCayman")
 set(PROJECT_VERSION_LONG ${PROJECT_VERSION})
 
 # C++11
+set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-# For some reason the above flags don't really work...
-if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang" OR CMAKE_COMPILER_IS_GNUCXX)
-    include(CheckCXXCompilerFlag)
-    check_cxx_compiler_flag(--std=c++${CMAKE_CXX_STANDARD} STD_CXX)
-    if(STD_CXX)
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --std=c++${CMAKE_CXX_STANDARD}")
+
+if(${CMAKE_VERSION} LESS 3.2)
+    if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang" OR CMAKE_COMPILER_IS_GNUCXX)
+        include(CheckCXXCompilerFlag)
+        check_cxx_compiler_flag(--std=c++${CMAKE_CXX_STANDARD} STD_CXX)
+        if(STD_CXX)
+            set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --std=c++${CMAKE_CXX_STANDARD}")
+        else()
+            message(SEND_ERROR "Requires C++${CMAKE_CXX_STANDARD} or better")
+        endif()
     else()
-        message(SEND_ERROR "Requires C++${CMAKE_CXX_STANDARD} or better")
+        message(WARNING "Unrecognized compiler: ${CMAKE_CXX_COMPILER_ID}, make sure it supports C++${CMAKE_CXX_STANDARD}")
     endif()
-else()
-    message(WARNING "Unrecognized compiler: ${CMAKE_CXX_COMPILER_ID}, make sure it supports C++${CMAKE_CXX_STANDARD}")
 endif()
 
 # Debug flags

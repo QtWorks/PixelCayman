@@ -3,7 +3,7 @@
  *
  * \author Mattia Basaglia
  *
- * \copyright Copyright (C) 2015 Mattia Basaglia
+ * \copyright Copyright (C) 2015-2016 Mattia Basaglia
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -39,7 +39,7 @@ DialogAbout::DialogAbout(QWidget* parent)
     text_license->setHtml(tr(
 R"(<!DOCTYPE html">
 <html><head><meta name="qrichtext" content="1" /></head><body>
-<p>Copyright (C) 2015 Mattia Basaglia</p>
+<p>Copyright (C) 2015-2016 Mattia Basaglia</p>
 <p>This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 3 of the License, or
